@@ -11,4 +11,4 @@ import java.util.List;
 public interface AndarRepository extends JpaRepository<Andar,Integer> {
     List<Andar> findByAtivo(Boolean ativo);
 
-}git
+}
