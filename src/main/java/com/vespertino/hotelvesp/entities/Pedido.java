@@ -20,9 +20,6 @@ public class Pedido {
     @Column(name = "id_quarto")
     private Integer idQuarto;
 
-    @Column(name = "id_funcionario")
-    private Integer idFuncionario;
-
     public Integer getId() {
         return id;
     }
@@ -55,11 +52,4 @@ public class Pedido {
         this.idQuarto = idQuarto;
     }
 
-    public Integer getIdFuncionario() {
-        return idFuncionario;
-    }
-
-    public void setIdFuncionario(Integer idFuncionario) {
-        this.idFuncionario = idFuncionario;
-    }
 }
