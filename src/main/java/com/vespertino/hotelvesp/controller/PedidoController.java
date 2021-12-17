@@ -45,14 +45,4 @@ public class PedidoController {
         msg.setMensagem("Alterado com sucesso");
         return msg;
     }
-
-    @DeleteMapping
-    public Mensagem deletar (@RequestBody Pedido pedido) {
-        pedido.setAtivo(false);
-        pedidoRepository.saveAndFlush(pedido);
-
-        Mensagem msg = new Mensagem();
-        msg.setMensagem("Deletado com sucesso");
-        return msg;
-    }
 }
