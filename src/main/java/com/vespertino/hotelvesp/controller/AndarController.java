@@ -24,7 +24,7 @@ public class AndarController {
         return andar;
     }
     @PostMapping
-    public Mensagem incluirTime(@RequestBody Andar andar){
+    public Mensagem incluirAndar(@RequestBody Andar andar){
         andar.setId(0);
         andarRepository.save(andar);
         andarRepository.flush();

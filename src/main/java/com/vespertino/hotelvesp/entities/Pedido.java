@@ -17,9 +17,6 @@ public class Pedido {
     @Column(name = "ativo")
     private Boolean ativo;
 
-    @Column(name = "id_prato")
-    private Integer idPrato;
-
     @Column(name = "id_quarto")
     private Integer idQuarto;
 
@@ -48,14 +45,6 @@ public class Pedido {
 
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
-    }
-
-    public Integer getIdPrato() {
-        return idPrato;
-    }
-
-    public void setIdPrato(Integer idPrato) {
-        this.idPrato = idPrato;
     }
 
     public Integer getIdQuarto() {
