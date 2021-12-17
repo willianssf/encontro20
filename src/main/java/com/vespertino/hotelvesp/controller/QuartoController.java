@@ -35,4 +35,23 @@ public class QuartoController {
         msg.setMensagem("Incluido com sucesso");
         return msg;
     }
+
+    @PutMapping
+    public Mensagem alterar (@RequestBody Quarto quarto) {
+        quartoRepository.save(quarto);
+        quartoRepository.flush();
+        Mensagem msg = new Mensagem();
+        msg.setMensagem("Alterado com sucesso");
+        return msg;
+    }
+
+    @DeleteMapping
+    public Mensagem deletar (@RequestBody Quarto quarto) {
+        quarto.setAtivo(false);
+        quartoRepository.save(quarto);
+        quartoRepository.flush();
+        Mensagem msg = new Mensagem();
+        msg.setMensagem("Deletado com sucesso");
+        return msg;
+    }
 }
