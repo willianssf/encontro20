@@ -6,6 +6,7 @@ import com.vespertino.hotelvesp.repositories.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -20,11 +21,24 @@ public class PedidoController {
         List<Pedido> lista = pedidoRepository.findByAtivo(true);
         return lista;
     }
-
     @GetMapping("/{id}")
     public Pedido buscar (@PathVariable int id) {
         Pedido pedido = pedidoRepository.findById(id).get();
         return pedido;
+   }
+
+    @GetMapping("/quarto/{id}")
+    public List<Pedido> x (@PathVariable int id) {
+        List<Pedido> pedido = pedidoRepository.findAll();
+        List<Pedido> lista = new ArrayList<>();
+
+        for(int i = 0; i < pedido.size(); i++){
+            if(pedido.get(i).getIdQuarto() == id){
+                lista.add(pedido.get(i));
+            }
+
+        }
+        return lista;
     }
 
     @PostMapping
