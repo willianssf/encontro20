@@ -3,7 +3,7 @@ package com.vespertino.hotelvesp.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name ="")
+@Table(name ="prato")
 public class Prato {
 
     @Id
