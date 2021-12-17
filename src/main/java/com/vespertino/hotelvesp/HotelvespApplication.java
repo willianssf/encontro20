@@ -8,10 +8,9 @@ public class HotelvespApplication {
 
 
 	public static void main(String[] args) {
-		System.out.println("DemoApp...");
-
+		System.out.println("Iniciando aplication...");
 		SpringApplication.run(HotelvespApplication.class, args);
-		System.out.println("DemoApp inicializado");
+		System.out.println("Aplication inicializado");
 	}
 
 }
