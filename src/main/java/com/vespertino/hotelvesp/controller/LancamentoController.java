@@ -29,6 +29,7 @@ public class LancamentoController {
     @PostMapping
     public Mensagem incluir (@RequestBody Lancamento lancamento) {
         lancamento.setId(0);
+
         lancamentoRepository.save(lancamento);
         lancamentoRepository.flush();
         Mensagem msg = new Mensagem();
