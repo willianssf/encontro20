@@ -32,10 +32,7 @@ public class PedidoController {
     public List<Pedido> x (@PathVariable int id) {
         List<Pedido> pedido = pedidoRepository.findAll();
 
-        //return pedido.stream().filter(x->x.getIdQuarto() == id).collect(Collectors.toList());
-
         return pedidoRepository.findByIdQuarto(id);
-
     }
 
     @PostMapping
