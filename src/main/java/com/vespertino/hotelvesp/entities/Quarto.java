@@ -13,13 +13,13 @@ public class Quarto {
     @Pattern(regexp="^[0-9]{1,10}$")
     private Integer id;
     @Column(name="nome", nullable = false, length = 255)
-    @Pattern(regexp="^[A-zs]{1,}$")
+    @Pattern(regexp="^[A-z\s]{1,255}$")
     private String nome;
     @Column(name="numero", nullable = false, length = 10)
     @Pattern(regexp="^[0-9]{1,10}$")
     private Integer numero;
     @Column(name="diaria", nullable = false, length = 9)
-    @Pattern(regexp="^[0-9]{1,9}[.][0-9]{1,2}$")
+    @Pattern(regexp="^[0-9]{1,9}[.,][0-9]{1,2}$")
     private BigDecimal diaria;
     @Column(name="capacidade", nullable = false, length = 4)
     @Pattern(regexp = "^[0-1][0-9]$")
