@@ -52,10 +52,6 @@ public class FuncionarioController {
         msg.setMensagem("deletado");
         return msg;
 
-
-
-
-
     }
 
 }
