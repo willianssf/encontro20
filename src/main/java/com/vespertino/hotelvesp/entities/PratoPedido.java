@@ -1,17 +1,21 @@
 package com.vespertino.hotelvesp.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name="prato_pedido")
 public class PratoPedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name="id", length = 10, nullable = false)
+    @Pattern(regexp = "[0-9]{10}")
     private Integer id;
-    @Column(name="id_prato")
+    @Column(name="id_prato", length = 10, nullable = false)
+    @Pattern(regexp = "[0-9]{10}")
     private Integer idPrato;
-    @Column(name="id_pedido")
+    @Column(name="id_pedido", length = 10,nullable = false)
+    @Pattern(regexp = "[0-9]{10}")
     private Integer idPedido;
 
     public Integer getId() {

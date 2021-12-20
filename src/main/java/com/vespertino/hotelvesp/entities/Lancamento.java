@@ -1,6 +1,7 @@
 package com.vespertino.hotelvesp.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.math.BigDecimal;
 
 @Entity
@@ -8,13 +9,20 @@ import java.math.BigDecimal;
 public class Lancamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name="id", length = 10, nullable = false)
+    @Pattern(regexp="[0-9]{10}]")
     private Integer id;
-    @Column(name="debito")
+
+    @Column(name="debito", length = 18, nullable = false)
+    @Pattern(regexp="^[0-9]{1,15}[.][0-9]{1,2}$")
     private BigDecimal debito;
-    @Column(name="adicional")
+
+    @Column(name="adicional", length = 18, nullable = false)
+    @Pattern(regexp="^[0-9]{1,15}[.][0-9]{1,2}$")
     private BigDecimal adicional;
-    @Column(name="ativo")
+
+    @Column(name="ativo", length = 1, nullable = false)
+    @Pattern(regexp="^[0-1]$")
     private Boolean ativo;
 
     public Integer getId() {
