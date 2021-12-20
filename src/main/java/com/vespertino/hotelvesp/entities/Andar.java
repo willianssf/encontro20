@@ -1,6 +1,7 @@
 package com.vespertino.hotelvesp.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "andar")
@@ -8,10 +9,12 @@ public class Andar {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Integer id;
+    @Column(name = "id", length = 10, nullable = false)
+    @Pattern(regexp="[0-9]{10}]")
 
-    @Column(name = "nivel")
+    private Integer id;
+    @Column(name = "nivel", nullable = false, unique = true, length = 255)
+    @Pattern(regexp="[A-z0-9\s]{1,255}")
     private String nivel;
 
     @Column(name = "capacidade_quarto")
