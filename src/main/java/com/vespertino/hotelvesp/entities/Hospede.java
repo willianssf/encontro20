@@ -12,7 +12,7 @@ public class Hospede {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="id", nullable = false, length = 10)
-    @Pattern(regexp="[0-9]{10}]")
+    @Pattern(regexp="^[0-9]{10}$")
     private Integer id;
     @Column(name="nome", nullable = false, length = 255)
     @Pattern(regexp="^[A-z]{1,255}$")
@@ -27,7 +27,7 @@ public class Hospede {
     @Pattern(regexp = "^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$")
     private BigDecimal limite_credito;
     @Column(name="id_quarto",nullable = false,length = 10)
-    @Pattern(regexp = "[0-9]{10}")
+    @Pattern(regexp = "^[0-9]{10}$")
     private Integer id_quarto;
     @Column(name="ativo", nullable = false)
     @Pattern(regexp = "^true$|^false$")
