@@ -1,6 +1,7 @@
 package com.vespertino.hotelvesp.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.math.BigDecimal;
 
 @Entity
@@ -8,23 +9,32 @@ import java.math.BigDecimal;
 public class Quarto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name="id", length = 10, nullable = false)
+    @Pattern(regexp="[0-9]{10}")
     private Integer id;
-    @Column(name="nome")
+    @Column(name="nome", nullable = false, length = 255)
+    @Pattern(regexp="[A-z\s]{1,}")
     private String nome;
-    @Column(name="numero")
+    @Column(name="numero", nullable = false, length = 10)
+    @Pattern(regexp="[0-9]{10}")
     private Integer numero;
-    @Column(name="diaria")
+    @Column(name="diaria", nullable = false, length = 9)
+    @Pattern(regexp="^[0-9]{1,9}[.][0-9]{1,2}$")
     private BigDecimal diaria;
-    @Column(name="capacidade")
+    @Column(name="capacidade", nullable = false, length = 4)
+    @Pattern(regexp = "[0-1][0-9]")
     private Integer capacidade;
-    @Column(name="area_quarto")
+    @Column(name="area_quarto", nullable = false, length = 8)
+    @Pattern(regexp = "[0-9]{1,3}[.,][0-9]{1,2}")
     private Double areaQuarto;
     @Column(name="ativo")
+    @Pattern(regexp = "^true$|^false$")
     private Boolean ativo;
-    @Column(name="id_andar")
+    @Column(name="id_andar", length = 10, nullable = false)
+    @Pattern(regexp="[0-9]{10}")
     private Integer idAndar;
-    @Column(name="id_funcionario")
+    @Column(name="id_funcionario", length = 10, nullable = false)
+    @Pattern(regexp="[0-9]{10}")
     private Integer idFuncionario;
 
     public Integer getId() {
