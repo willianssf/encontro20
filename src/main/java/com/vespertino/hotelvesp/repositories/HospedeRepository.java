@@ -8,4 +8,6 @@ import java.util.List;
 public interface HospedeRepository extends JpaRepository<Hospede, Integer> {
 
     List<Hospede> findByativo(Boolean ativo);
+
+    List<Hospede> findByidQuarto(Integer idQuarto);
 }

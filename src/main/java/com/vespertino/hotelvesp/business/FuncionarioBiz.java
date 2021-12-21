@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class FuncionarioBiz {
-
     // tem que ter um metodo chamado isValid
     private Funcionario funcionario;
     private FuncionarioRepository funcionarioRepository;
@@ -34,18 +33,13 @@ public class FuncionarioBiz {
         resultado =  primeiraLetraMaiuscula(this.funcionario.getNome()) && resultado;
         resultado =  salarioAcimaDe1100(this.funcionario.getSalario()) && resultado;
 
-
         return resultado;
     }
 
-    // o nome nao pode existir no banco de dados (nao pode ter nome repetido
-    // a primaira letra tem que ser maiuscula
-    // o salario deve ser acima de 1100
     // o nome deve ter entre 10 e 50 caracteres
-
     // o email nao pode ser vazio
 
-
+    // o nome nao pode existir no banco de dados (nao pode ter nome repetido)
     public Boolean nomeNaoExiste( String nome ){
         List<Funcionario> lista = funcionarioRepository.findByNome(nome);
         Boolean resultado = lista.isEmpty();
@@ -54,19 +48,17 @@ public class FuncionarioBiz {
         }
         return resultado;
     }
-
+    // a primaira letra tem que ser maiuscula
     public Boolean primeiraLetraMaiuscula(String nome){
-
         Boolean resultado  =nome.matches("^[A-Z]{1}[A-Za-z\s]{1,50}");
         if (!resultado){
             erros.add("O nome precisa ter a primeira letra maiuscula");
         }
         return resultado;
     }
-
+    // o salario deve ser acima de 1100
     public Boolean salarioAcimaDe1100( BigDecimal salario ){
         Boolean resultado = salario.doubleValue() >= 1100;
-
         if (!resultado){
             erros.add("O Salario deve ser maior ou igual a 1100");
         }

@@ -1,6 +1,8 @@
 package com.vespertino.hotelvesp.controller;
 
 import com.vespertino.hotelvesp.Mensagem;
+import com.vespertino.hotelvesp.business.AndarBiz;
+import com.vespertino.hotelvesp.business.FuncionarioBiz;
 import com.vespertino.hotelvesp.entities.Andar;
 import com.vespertino.hotelvesp.repositories.AndarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +27,18 @@ public class AndarController {
     }
     @PostMapping
     public Mensagem incluirAndar(@RequestBody Andar andar){
-        andar.setId(0);
-        andarRepository.save(andar);
-        andarRepository.flush();
+        AndarBiz andarBiz = new AndarBiz(andar, andarRepository);
         Mensagem msg = new Mensagem();
-        msg.setMensagem("ok");
+
+        if (andarBiz.isValid()) {
+            andar.setId(0);
+            andarRepository.save(andar);
+            andarRepository.flush();
+            msg.setMensagem("ok");
+        } else {
+            msg.setErro( andarBiz.getErros() );
+            msg.setMensagem("Erro");
+        }
         return msg;
 
 
