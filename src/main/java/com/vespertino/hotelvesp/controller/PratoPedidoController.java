@@ -1,6 +1,8 @@
 package com.vespertino.hotelvesp.controller;
 
 import com.vespertino.hotelvesp.Mensagem;
+import com.vespertino.hotelvesp.business.FuncionarioBiz;
+import com.vespertino.hotelvesp.business.PratoPedidoBiz;
 import com.vespertino.hotelvesp.entities.Pedido;
 import com.vespertino.hotelvesp.entities.Prato;
 import com.vespertino.hotelvesp.entities.PratoPedido;
@@ -19,6 +21,7 @@ public class PratoPedidoController {
     @Autowired
     private PratoPedidoRepository pratoPedidoRepository;
 
+
     @GetMapping
     public List<PratoPedido> listar () {
         List<PratoPedido> lista = pratoPedidoRepository.findAll();
@@ -33,20 +36,39 @@ public class PratoPedidoController {
 
     @PostMapping
     public Mensagem incluir (@RequestBody PratoPedido pedido) {
-        pedido.setId(0);
-        pratoPedidoRepository.saveAndFlush(pedido);
-        ;
+        PratoPedidoBiz pratoPedidoBiz  = new PratoPedidoBiz(pedido, pratoPedidoRepository);
         Mensagem msg = new Mensagem();
-        msg.setMensagem("Incluido com sucesso");
+
+        if (pratoPedidoBiz.isValid()) {
+            pedido.setId(0);
+            pratoPedidoRepository.saveAndFlush(pedido);
+            msg.setMensagem("ok");
+
+
+        } else {
+            msg.setErro( pratoPedidoBiz.getErros() );
+            msg.setMensagem("Erro");
+            pratoPedidoBiz.getErros();
+
+
+        }
         return msg;
     }
 
     @PutMapping
     public Mensagem alterar (@RequestBody PratoPedido pedido) {
-        pratoPedidoRepository.saveAndFlush(pedido);
-
+        PratoPedidoBiz pratoPedidoBiz  = new PratoPedidoBiz(pedido, pratoPedidoRepository);
         Mensagem msg = new Mensagem();
-        msg.setMensagem("Alterado com sucesso");
+
+        if (pratoPedidoBiz.isValid()) {
+            pratoPedidoRepository.saveAndFlush(pedido);
+            msg.setMensagem("Alterado com sucesso");
+        } else {
+            msg.setErro( pratoPedidoBiz.getErros() );
+            msg.setMensagem("Erro");
+            pratoPedidoBiz.getErros();
+        }
+
         return msg;
     }
 

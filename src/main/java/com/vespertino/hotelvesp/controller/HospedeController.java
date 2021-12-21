@@ -6,6 +6,7 @@ import com.vespertino.hotelvesp.business.FuncionarioBiz;
 import com.vespertino.hotelvesp.business.HospedeBiz;
 import com.vespertino.hotelvesp.entities.Hospede;
 import com.vespertino.hotelvesp.repositories.HospedeRepository;
+import com.vespertino.hotelvesp.repositories.QuartoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,7 @@ public class HospedeController {
 
     @Autowired
     private HospedeRepository hospedeRepository;
+    private QuartoRepository quartoRepository;
 
     @GetMapping
     public List<Hospede> lista(){
@@ -33,7 +35,7 @@ public class HospedeController {
     @PostMapping
     public Mensagem incluir(@RequestBody Hospede hospede){
 
-        HospedeBiz hospedeBiz = new HospedeBiz(hospede, hospedeRepository);
+        HospedeBiz hospedeBiz = new HospedeBiz(hospede, hospedeRepository /*, quartoRepository*/);
         Mensagem msg = new Mensagem();
 
         if (hospedeBiz.isValid()) {
