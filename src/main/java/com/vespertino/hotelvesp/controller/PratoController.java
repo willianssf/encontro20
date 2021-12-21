@@ -1,6 +1,7 @@
 package com.vespertino.hotelvesp.controller;
 
 import com.vespertino.hotelvesp.Mensagem;
+import com.vespertino.hotelvesp.business.PratoBiz;
 import com.vespertino.hotelvesp.entities.Pedido;
 import com.vespertino.hotelvesp.entities.Prato;
 import com.vespertino.hotelvesp.repositories.PedidoRepository;
@@ -31,11 +32,17 @@ public class PratoController {
 
     @PostMapping
     public Mensagem incluir (@RequestBody Prato prato) {
-        prato.setId(0);
-        pratoRepository.saveAndFlush(prato);
-        ;
+        PratoBiz pratoBiz = new PratoBiz(prato, pratoRepository);
         Mensagem msg = new Mensagem();
-        msg.setMensagem("Incluido com sucesso");
+
+        if (pratoBiz.isValid()) {
+            prato.setId(0);
+            pratoRepository.saveAndFlush(prato);
+            msg.setMensagem("Incluido com sucesso");
+        } else {
+            msg.setErro(pratoBiz.getErros());
+            msg.setMensagem("Erro");
+        }
         return msg;
     }
 
