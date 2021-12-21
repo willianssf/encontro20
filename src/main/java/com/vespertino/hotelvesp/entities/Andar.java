@@ -10,17 +10,16 @@ public class Andar {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", length = 10, nullable = false)
-    @Pattern(regexp="[0-9]{10}]")
-
+    @Pattern(regexp="^[0-9]{1,10}$")
     private Integer id;
     @Column(name = "nivel", nullable = false, unique = true, length = 255)
     @Pattern(regexp="[A-z0-9\s]{1,255}")
     private String nivel;
-
-    @Column(name = "capacidade_quarto")
+    @Column(name = "capacidade_quarto", nullable = false, length = 4)
+    @Pattern(regexp = "^[0-9]{1,10}$")
     private Integer capacidadeQuarto;
-
-    @Column(name = "ativo")
+    @Column(name = "ativo", nullable = false)
+    @Pattern(regexp = "^true$|^false$")
     private Boolean ativo;
 
     public Integer getId() {

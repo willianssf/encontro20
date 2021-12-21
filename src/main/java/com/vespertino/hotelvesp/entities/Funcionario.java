@@ -19,7 +19,7 @@ public class Funcionario {
     @Column(name="telefone")
     private String telefone;
     @Column(name="salario")
-    private Double salario;
+    private BigDecimal salario;
     @Column(name="cargo")
     private String cargo;
     @Column(name="ativo")
@@ -59,11 +59,11 @@ public class Funcionario {
         this.telefone = telefone;
     }
 
-    public Double getSalario() {
+    public BigDecimal getSalario() {
         return salario;
     }
 
-    public void setSalario(Double salario) {
+    public void setSalario(BigDecimal salario) {
         this.salario = salario;
     }
 
@@ -90,5 +90,4 @@ public class Funcionario {
     public void setIdLancamento(Integer idLancamento) {
         this.idLancamento = idLancamento;
     }
-
 }
