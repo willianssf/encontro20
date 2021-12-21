@@ -10,4 +10,5 @@ import java.util.List;
 public interface PratoRepository extends JpaRepository<Prato, Integer> {
 
     List<Prato> findByAtivo(Boolean ativo);
+    List<Prato> findByNome(String nome);
 }
