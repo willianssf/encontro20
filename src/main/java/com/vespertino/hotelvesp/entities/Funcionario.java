@@ -2,7 +2,6 @@ package com.vespertino.hotelvesp.entities;
 
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.constraints.Pattern;
 import java.math.BigDecimal;
 

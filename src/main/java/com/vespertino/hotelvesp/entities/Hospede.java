@@ -3,7 +3,6 @@ package com.vespertino.hotelvesp.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
-import java.math.BigDecimal;
 
 @Entity
 @Table(name="hospede")
@@ -25,7 +24,7 @@ public class Hospede {
     private String telefone;
     @Column(name="limite_credito", nullable = false, length = 255)
     @Pattern(regexp = "^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$")
-    private BigDecimal limite_credito;
+    private Double limite_credito;
     @Column(name="id_quarto",nullable = false,length = 10)
     @Pattern(regexp = "^[0-9]{1,10}$")
     private Integer id_quarto;
@@ -65,11 +64,11 @@ public class Hospede {
         this.telefone = telefone;
     }
 
-    public BigDecimal getLimite_credito() {
+    public Double getLimite_credito() {
         return limite_credito;
     }
 
-    public void setLimite_credito(BigDecimal limite_credito) {
+    public void setLimite_credito(Double limite_credito) {
         this.limite_credito = limite_credito;
     }
 
