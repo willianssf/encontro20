@@ -10,7 +10,7 @@ public class Lancamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id", length = 10, nullable = false)
-    @Pattern(regexp="[0-9]{10}]")
+    @Pattern(regexp="[0-9]{1,10}]")
     private Integer id;
 
     @Column(name="debito", length = 18, nullable = false)
