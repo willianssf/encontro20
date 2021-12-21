@@ -16,7 +16,7 @@ public class Andar {
     @Pattern(regexp="[A-z0-9\s]{1,255}")
     private String nivel;
     @Column(name = "capacidade_quarto", nullable = false, length = 4)
-    @Pattern(regexp = "^[0-9]{1,10}$")
+    @Pattern(regexp = "^[0-9]{1,4}$")
     private Integer capacidadeQuarto;
     @Column(name = "ativo", nullable = false)
     @Pattern(regexp = "^true$|^false$")
