@@ -2,7 +2,6 @@ package com.vespertino.hotelvesp.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
-import java.math.BigDecimal;
 
 @Entity
 @Table (name="lancamento")
@@ -15,11 +14,11 @@ public class Lancamento {
 
     @Column(name="debito", length = 18, nullable = false)
     @Pattern(regexp="^[0-9]{1,15}[.][0-9]{1,2}$")
-    private BigDecimal debito;
+    private Double debito;
 
     @Column(name="adicional", length = 18, nullable = false)
     @Pattern(regexp="^[0-9]{1,15}[.][0-9]{1,2}$")
-    private BigDecimal adicional;
+    private Double adicional;
 
     @Column(name="ativo", length = 1, nullable = false)
     @Pattern(regexp="^[0-1]$")
@@ -33,19 +32,19 @@ public class Lancamento {
         this.id = id;
     }
 
-    public BigDecimal getDebito() {
+    public Double getDebito() {
         return debito;
     }
 
-    public void setDebito(BigDecimal debito) {
+    public void setDebito(Double debito) {
         this.debito = debito;
     }
 
-    public BigDecimal getAdicional() {
+    public Double getAdicional() {
         return adicional;
     }
 
-    public void setAdicional(BigDecimal adicional) {
+    public void setAdicional(Double adicional) {
         this.adicional = adicional;
     }
 
