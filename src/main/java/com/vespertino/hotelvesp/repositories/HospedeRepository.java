@@ -9,5 +9,5 @@ public interface HospedeRepository extends JpaRepository<Hospede, Integer> {
 
     List<Hospede> findByativo(Boolean ativo);
 
-    List<Hospede>
+    List<Hospede> findByidQuarto(Integer idQuarto);
 }

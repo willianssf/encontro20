@@ -27,7 +27,7 @@ public class Hospede {
     private Double limite_credito;
     @Column(name="id_quarto",nullable = false,length = 10)
     @Pattern(regexp = "^[0-9]{1,10}$")
-    private Integer id_quarto;
+    private Integer idQuarto;
     @Column(name="ativo", nullable = false)
     @Pattern(regexp = "^true$|^false$")
     private Boolean ativo;
@@ -72,12 +72,12 @@ public class Hospede {
         this.limite_credito = limite_credito;
     }
 
-    public Integer getId_quarto() {
-        return id_quarto;
+    public Integer getIdQuarto() {
+        return idQuarto;
     }
 
-    public void setId_quarto(Integer id_quarto) {
-        this.id_quarto = id_quarto;
+    public void setIdQuarto(Integer idQuarto) {
+        this.idQuarto = idQuarto;
     }
 
     public Boolean getAtivo() {

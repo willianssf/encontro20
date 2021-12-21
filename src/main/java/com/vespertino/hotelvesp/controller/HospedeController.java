@@ -33,7 +33,7 @@ public class HospedeController {
     @PostMapping
     public Mensagem incluir(@RequestBody Hospede hospede){
 
-        HospedeBiz hospedeBiz = new FuncionarioBiz(hospede, hospedeRepository);
+        HospedeBiz hospedeBiz = new HospedeBiz(hospede, hospedeRepository);
         Mensagem msg = new Mensagem();
 
         if (hospedeBiz.isValid()) {
