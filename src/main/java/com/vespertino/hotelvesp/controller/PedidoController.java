@@ -1,8 +1,11 @@
 package com.vespertino.hotelvesp.controller;
 
 import com.vespertino.hotelvesp.Mensagem;
+import com.vespertino.hotelvesp.business.FuncionarioBiz;
+import com.vespertino.hotelvesp.business.PedidoBiz;
 import com.vespertino.hotelvesp.entities.Pedido;
 import com.vespertino.hotelvesp.repositories.PedidoRepository;
+import com.vespertino.hotelvesp.repositories.QuartoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +19,7 @@ public class PedidoController {
 
     @Autowired
     private PedidoRepository pedidoRepository;
+    private QuartoRepository quartoRepository;
 
     @GetMapping
     public List<Pedido> listar () {
@@ -37,11 +41,19 @@ public class PedidoController {
 
     @PostMapping
     public Mensagem incluir (@RequestBody Pedido pedido) {
-        pedido.setId(0);
-        pedidoRepository.saveAndFlush(pedido);
-
+        PedidoBiz pedidoBiz = new PedidoBiz(pedido, pedidoRepository);
         Mensagem msg = new Mensagem();
-        msg.setMensagem("Incluido com sucesso");
+
+        if (pedidoBiz.isValid()) {
+
+            pedido.setId(0);
+            pedidoRepository.saveAndFlush(pedido);
+            msg.setMensagem("Incluido com sucesso");
+        }
+        else{
+            msg.setErro(pedidoBiz.getErros());
+            msg.setMensagem("erro");
+        }
         return msg;
     }
 
