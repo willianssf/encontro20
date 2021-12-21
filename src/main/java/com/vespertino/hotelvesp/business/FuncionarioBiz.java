@@ -3,6 +3,7 @@ package com.vespertino.hotelvesp.business;
 import com.vespertino.hotelvesp.entities.Funcionario;
 import com.vespertino.hotelvesp.repositories.FuncionarioRepository;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -63,8 +64,8 @@ public class FuncionarioBiz {
         return resultado;
     }
 
-    public Boolean salarioAcimaDe1100( Double salario ){
-        Boolean resultado = salario >= 1100;
+    public Boolean salarioAcimaDe1100( BigDecimal salario ){
+        Boolean resultado = salario.doubleValue() >= 1100;
 
         if (!resultado){
             erros.add("O Salario deve ser maior ou igual a 1100");
