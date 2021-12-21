@@ -23,10 +23,11 @@ public class HospedeBiz {
         this.erros = erros;
     }
 
-    public HospedeBiz(Hospede hospede, HospedeRepository hospedeRepository){
+    public HospedeBiz(Hospede hospede, HospedeRepository hospedeRepository, QuartoRepository quartoRepository ){
         this.hospede = hospede;
         this.hospedeRepository = hospedeRepository;
         this.erros = new ArrayList<>();
+        this.quartoRepository = quartoRepository;
     }
 
     public Boolean isValid(){
@@ -76,13 +77,13 @@ public class HospedeBiz {
         }
         return resultado;
     }
-    //public Boolean quartoExiste( Integer idquarto ) {
-       // Quarto lista = quartoRepository.findById(idquarto).stream();
-       // Boolean resultado = !lista.equals();
-        //if (!resultado) {
-         //   erros.add("Quarto não existe!");
-       // }
-       // return resultado;
-    //}
+    public Boolean quartoExiste( Integer idquarto ){
+        List<Quarto> lista = quartoRepository.findByid(idquarto);
+        Boolean resultado = !lista.isEmpty();
+        if (!resultado){
+            erros.add("Quarto não existe!");
+        }
+        return resultado;
+    }
 
 }
