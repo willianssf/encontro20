@@ -1,6 +1,7 @@
 package com.vespertino.hotelvesp.controller;
 
 import com.vespertino.hotelvesp.Mensagem;
+import com.vespertino.hotelvesp.business.FuncionarioBiz;
 import com.vespertino.hotelvesp.entities.Funcionario;
 import com.vespertino.hotelvesp.repositories.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import java.util.List;
 public class FuncionarioController {
     @Autowired
     private FuncionarioRepository funcionarioRepository;
+
     @GetMapping
     public List<Funcionario> listar(){
         List<Funcionario> lista = funcionarioRepository.findByAtivo(true);
@@ -24,14 +26,21 @@ public class FuncionarioController {
         return funcionario;
     }
     @PostMapping
-    public Mensagem incluirFunc(@RequestBody Funcionario funcionario){
-        funcionario.setId(0);
-        funcionarioRepository.save(funcionario);
-        funcionarioRepository.flush();
-        Mensagem msg = new Mensagem();
-        msg.setMensagem("ok");
-        return msg;
+    public Mensagem incluir(@RequestBody Funcionario funcionario){
 
+        FuncionarioBiz funcionarioBiz = new FuncionarioBiz(funcionario, funcionarioRepository);
+        Mensagem msg = new Mensagem();
+
+        if (funcionarioBiz.isValid()) {
+            funcionario.setId(0);
+            funcionarioRepository.save(funcionario);
+            funcionarioRepository.flush();
+            msg.setMensagem("ok");
+        } else {
+            msg.setErro( funcionarioBiz.getErros() );
+            msg.setMensagem("Erro");
+        }
+        return msg;
 
     }
     @PutMapping
