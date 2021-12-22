@@ -18,8 +18,6 @@ public class PedidoBiz {
     private QuartoRepository quartoRepository;
     private List<String> erros;
 
-
-
     public List<String> getErros(){
         return erros;
     }

@@ -31,9 +31,6 @@ public class Funcionario {
     @Column(name="ativo", nullable = false)
     @Pattern(regexp = "(?i)(true|false)")
     private Boolean ativo;
-    @Column(name="id_lancamento", nullable = false, unique = true, length = 10)
-    @Pattern(regexp = "[0-9]{10}")
-    private Integer idLancamento;
 
     public Integer getId() {
         return id;
@@ -89,13 +86,5 @@ public class Funcionario {
 
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
-    }
-
-    public Integer getIdLancamento() {
-        return idLancamento;
-    }
-
-    public void setIdLancamento(Integer idLancamento) {
-        this.idLancamento = idLancamento;
     }
 }

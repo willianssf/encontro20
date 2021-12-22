@@ -4,6 +4,7 @@ import com.vespertino.hotelvesp.Mensagem;
 import com.vespertino.hotelvesp.business.FuncionarioBiz;
 import com.vespertino.hotelvesp.entities.Funcionario;
 import com.vespertino.hotelvesp.repositories.FuncionarioRepository;
+import com.vespertino.hotelvesp.repositories.LancamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
