@@ -8,6 +8,7 @@ import com.vespertino.hotelvesp.entities.Prato;
 import com.vespertino.hotelvesp.entities.PratoPedido;
 import com.vespertino.hotelvesp.repositories.PedidoRepository;
 import com.vespertino.hotelvesp.repositories.PratoPedidoRepository;
+import com.vespertino.hotelvesp.repositories.PratoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,8 @@ public class PratoPedidoController {
 
     @Autowired
     private PratoPedidoRepository pratoPedidoRepository;
+    private PratoRepository pratoRepository;
+    private PedidoRepository pedidoRepository;
 
 
     @GetMapping
@@ -36,7 +39,8 @@ public class PratoPedidoController {
 
     @PostMapping
     public Mensagem incluir (@RequestBody PratoPedido pedido) {
-        PratoPedidoBiz pratoPedidoBiz  = new PratoPedidoBiz(pedido, pratoPedidoRepository);
+        PratoPedidoBiz pratoPedidoBiz  = new PratoPedidoBiz(pedido, pratoPedidoRepository, pratoRepository,
+                pedidoRepository);
         Mensagem msg = new Mensagem();
 
         if (pratoPedidoBiz.isValid()) {
@@ -44,29 +48,25 @@ public class PratoPedidoController {
             pratoPedidoRepository.saveAndFlush(pedido);
             msg.setMensagem("ok");
 
-
         } else {
-            msg.setErro( pratoPedidoBiz.getErros() );
             msg.setMensagem("Erro");
-            pratoPedidoBiz.getErros();
-
-
+            msg.setErro( pratoPedidoBiz.getErros() );
         }
         return msg;
     }
 
     @PutMapping
     public Mensagem alterar (@RequestBody PratoPedido pedido) {
-        PratoPedidoBiz pratoPedidoBiz  = new PratoPedidoBiz(pedido, pratoPedidoRepository);
+        PratoPedidoBiz pratoPedidoBiz  = new PratoPedidoBiz(pedido, pratoPedidoRepository,pratoRepository,
+                pedidoRepository);
         Mensagem msg = new Mensagem();
 
         if (pratoPedidoBiz.isValid()) {
             pratoPedidoRepository.saveAndFlush(pedido);
             msg.setMensagem("Alterado com sucesso");
         } else {
-            msg.setErro( pratoPedidoBiz.getErros() );
             msg.setMensagem("Erro");
-            pratoPedidoBiz.getErros();
+            msg.setErro( pratoPedidoBiz.getErros() );
         }
 
         return msg;
