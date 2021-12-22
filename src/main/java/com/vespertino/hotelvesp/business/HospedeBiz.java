@@ -23,7 +23,7 @@ public class HospedeBiz {
         this.erros = erros;
     }
 
-    public HospedeBiz(Hospede hospede, HospedeRepository hospedeRepository/*, QuartoRepository quartoRepository */){
+    public HospedeBiz(Hospede hospede, HospedeRepository hospedeRepository, QuartoRepository quartoRepository ){
         this.hospede = hospede;
         this.hospedeRepository = hospedeRepository;
         this.erros = new ArrayList<>();
@@ -36,6 +36,7 @@ public class HospedeBiz {
         resultado = nomeAtendeCaracteres(this.hospede.getNome()) && resultado;
         resultado = emailPreenchido(this.hospede.getEmail()) && resultado;
         resultado = limiteCredito0a1000000(this.hospede.getLimite_credito()) && resultado;
+        resultado = quartoExiste(this.hospede.getIdQuarto()) && resultado;
 
         return resultado;
     }
@@ -43,7 +44,7 @@ public class HospedeBiz {
     public Boolean telefone11Numero (String telefone){
         Boolean resultado  = telefone.matches("^[0-9]{11}$");
         if (!resultado){
-            erros.add("O telegone nao possuo 11 numeros!");
+            erros.add("O telefone nao possui 11 numeros!");
         }
         return resultado;
 
@@ -77,13 +78,14 @@ public class HospedeBiz {
         }
         return resultado;
     }
-   /* public Boolean quartoExiste( Integer idquarto ){
-        List<Quarto> lista = quartoRepository.findByid(idquarto);
-        Boolean resultado = !lista.isEmpty();
-        if (!resultado){
-            erros.add("Quarto não existe!");
-        }
-        return resultado;
-    } */
+    public Boolean quartoExiste( Integer idquarto ){
+        Boolean vazio = quartoRepository.findById(idquarto).isEmpty();
+       if ( vazio){
+            erros.add("O quarto não existe!");
+            return true;
+        } else {
+           return false;
+       }
+    }
 
 }

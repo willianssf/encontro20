@@ -18,6 +18,7 @@ public class HospedeController {
 
     @Autowired
     private HospedeRepository hospedeRepository;
+    @Autowired
     private QuartoRepository quartoRepository;
 
     @GetMapping
@@ -35,7 +36,7 @@ public class HospedeController {
     @PostMapping
     public Mensagem incluir(@RequestBody Hospede hospede){
 
-        HospedeBiz hospedeBiz = new HospedeBiz(hospede, hospedeRepository /*, quartoRepository*/);
+        HospedeBiz hospedeBiz = new HospedeBiz(hospede, hospedeRepository , quartoRepository);
         Mensagem msg = new Mensagem();
 
         if (hospedeBiz.isValid()) {
