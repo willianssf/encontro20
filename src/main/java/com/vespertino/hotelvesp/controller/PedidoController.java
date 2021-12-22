@@ -4,6 +4,7 @@ import com.vespertino.hotelvesp.Mensagem;
 import com.vespertino.hotelvesp.business.FuncionarioBiz;
 import com.vespertino.hotelvesp.business.PedidoBiz;
 import com.vespertino.hotelvesp.entities.Pedido;
+import com.vespertino.hotelvesp.entities.Quarto;
 import com.vespertino.hotelvesp.repositories.PedidoRepository;
 import com.vespertino.hotelvesp.repositories.QuartoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class PedidoController {
     @GetMapping
     public List<Pedido> listar () {
         List<Pedido> lista = pedidoRepository.findByAtivo(true);
+        List<Quarto> listaQ = quartoRepository.findByAtivo(true);
         return lista;
     }
     @GetMapping("/{id}")
@@ -41,11 +43,10 @@ public class PedidoController {
 
     @PostMapping
     public Mensagem incluir (@RequestBody Pedido pedido) {
-        PedidoBiz pedidoBiz = new PedidoBiz(pedido, pedidoRepository);
+        PedidoBiz pedidoBiz = new PedidoBiz(pedido, pedidoRepository, quartoRepository);
         Mensagem msg = new Mensagem();
 
         if (pedidoBiz.isValid()) {
-
             pedido.setId(0);
             pedidoRepository.saveAndFlush(pedido);
             msg.setMensagem("Incluido com sucesso");

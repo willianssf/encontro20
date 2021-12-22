@@ -9,5 +9,4 @@ import java.util.List;
 @Repository
 public interface QuartoRepository extends JpaRepository<Quarto, Integer> {
     List<Quarto> findByAtivo(Boolean ativo);
-    //List<Quarto> findByid(Integer id);
 }

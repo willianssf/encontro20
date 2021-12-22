@@ -16,8 +16,6 @@ public class PedidoBiz {
     private PedidoRepository pedidoRepository;
     private QuartoRepository quartoRepository;
     private List<String> erros;
-    List<Quarto> list = quartoRepository.findByAtivo(true);
-
 
     public List<String> getErros(){
         return erros;
@@ -27,9 +25,10 @@ public class PedidoBiz {
         this.erros = erros;
     }
 
-    public PedidoBiz (Pedido p, PedidoRepository pr) {
+    public PedidoBiz (Pedido p, PedidoRepository pr, QuartoRepository qr) {
         this.pedido = p;
         this.pedidoRepository = pr;
+        this.quartoRepository = qr;
         this.erros = new ArrayList<>();
     }
 
@@ -47,18 +46,27 @@ public class PedidoBiz {
       }
       return resultado;
     }
+
     public Boolean verificarQuarto(Integer id){
         List<Pedido> lista = pedidoRepository.findByIdQuarto(id);
 
-
-
-        Boolean resultado = list.contains(lista.contains(id));
-        Boolean resulta2 = lista.isEmpty();
-
-        if (!resultado){
+        if (lista.isEmpty()) {
             erros.add("Quarto não existe");
+            return false;
         }
-        return !resultado;
+
+        if (!idQuartoAtivo(id)) {
+            erros.add("Quarto não existe");
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+    public Boolean idQuartoAtivo (Integer id) {
+        Boolean quarto = quartoRepository.findById(id).get().getAtivo();
+        return quarto;
     }
 
 
