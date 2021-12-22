@@ -21,7 +21,9 @@ public class PratoPedidoController {
 
     @Autowired
     private PratoPedidoRepository pratoPedidoRepository;
+    @Autowired
     private PratoRepository pratoRepository;
+    @Autowired
     private PedidoRepository pedidoRepository;
 
 

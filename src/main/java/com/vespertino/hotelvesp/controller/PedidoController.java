@@ -22,6 +22,7 @@ public class PedidoController {
     @Autowired
     private QuartoRepository quartoRepository;
 
+
     @GetMapping
     public List<Pedido> listar () {
         List<Pedido> lista = pedidoRepository.findByAtivo(true);

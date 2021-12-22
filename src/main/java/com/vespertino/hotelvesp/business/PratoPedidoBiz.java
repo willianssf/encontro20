@@ -37,53 +37,31 @@ public class PratoPedidoBiz {
     }
 
     public Boolean isValid(){
-        Boolean resultado = idPratoNaoExiste(this.pratoPedido.getIdPrato());
-        resultado = idPedidoNaoExiste(this.pratoPedido.getIdPedido()) && resultado;
-
+        Boolean resultado = idPratoExisteTabelaPrato(this.pratoPedido.getIdPrato());
+        resultado = idPedidoExisteTabelaPedido(this.pratoPedido.getIdPedido()) && resultado;
         return resultado;
     }
 
-    public Boolean idPratoNaoExiste(Integer id ){
-        List<PratoPedido> lista = pratoPedidoRepository.findByIdPrato(id);
-        if(lista.isEmpty()) {
+    public Boolean idPratoExisteTabelaPrato(Integer id ){
+
+        Boolean vazio = pratoRepository.findById(id).isEmpty();
+        if(vazio) {
             erros.add("O prato não está na lista");
             return false;
-        }
-        if (!idPratoAtivo(id)){
-            erros.add("O prato não está na lista");
-            return false;
-        }
-        else {
+        } else {
             return true;
         }
     }
 
-    public Boolean idPratoAtivo(Integer id){
-        Boolean pratoExiste = pratoRepository.findById(id).get().getAtivo();
+    public Boolean idPedidoExisteTabelaPedido(Integer id ){
 
-       return pratoExiste;
-    }
-
-    public Boolean idPedidoNaoExiste(Integer id ){
-        List<PratoPedido> lista = pratoPedidoRepository.findByIdPedido(id);
-        if(lista.isEmpty()) {
+        Boolean vazio = pedidoRepository.findById(id).isEmpty();
+        if(vazio) {
             erros.add("O pedido não está na lista");
             return false;
-        }
-        if (!idPedidoAtivo(id)){
-            erros.add("O pedio não está na lista");
-            return false;
-        }
-        else {
+        } else {
             return true;
         }
-
-    }
-
-    public Boolean idPedidoAtivo(Integer id){
-        Boolean pedidoExiste = pedidoRepository.findById(id).get().getAtivo();
-
-        return pedidoExiste;
     }
 
 }
