@@ -3,6 +3,7 @@ package com.vespertino.hotelvesp.business;
 
 import com.vespertino.hotelvesp.entities.Pedido;
 
+import com.vespertino.hotelvesp.entities.PratoPedido;
 import com.vespertino.hotelvesp.entities.Quarto;
 import com.vespertino.hotelvesp.repositories.PedidoRepository;
 import com.vespertino.hotelvesp.repositories.QuartoRepository;
@@ -16,6 +17,8 @@ public class PedidoBiz {
     private PedidoRepository pedidoRepository;
     private QuartoRepository quartoRepository;
     private List<String> erros;
+
+
 
     public List<String> getErros(){
         return erros;
@@ -34,7 +37,7 @@ public class PedidoBiz {
 
     public Boolean isValid() {
         Boolean resultado = valorDoPedido(this.pedido.getPreco());
-        resultado = verificarQuarto(this.pedido.getIdQuarto()) && resultado;
+        resultado = verificadorDoQuarto(this.pedido.getIdQuarto()) && resultado;
         return resultado;
     }
 
@@ -46,27 +49,25 @@ public class PedidoBiz {
       }
       return resultado;
     }
-
-    public Boolean verificarQuarto(Integer id){
+    public Boolean verificadorDoQuarto(Integer id ){
         List<Pedido> lista = pedidoRepository.findByIdQuarto(id);
-
-        if (lista.isEmpty()) {
-            erros.add("Quarto não existe");
+        if(lista.isEmpty()) {
+            erros.add("O quarto não está na lista");
             return false;
         }
-
-        if (!idQuartoAtivo(id)) {
-            erros.add("Quarto não existe");
+        if (!idQuartoAtivo(id)){
+            erros.add("O quarto não está na lista");
             return false;
-        } else {
+        }
+        else {
             return true;
         }
 
     }
+    public Boolean idQuartoAtivo(Integer id){
+        Boolean quartoexiste = quartoRepository.findById(id).get().getAtivo();
 
-    public Boolean idQuartoAtivo (Integer id) {
-        Boolean quarto = quartoRepository.findById(id).get().getAtivo();
-        return quarto;
+        return quartoexiste;
     }
 
 
