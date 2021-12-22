@@ -25,7 +25,6 @@ public class PedidoController {
     @GetMapping
     public List<Pedido> listar () {
         List<Pedido> lista = pedidoRepository.findByAtivo(true);
-        List<Quarto> listaQ = quartoRepository.findByAtivo(true);
         return lista;
     }
     @GetMapping("/{id}")
